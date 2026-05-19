@@ -1,0 +1,31 @@
+@{ ViewData["Title"] = "Create Booking";
+    var customers = (List<StayEase.DTO.Customer>)ViewBag.Customers;
+    var rooms = (List<StayEase.DTO.Room>)ViewBag.Rooms;
+}
+
+<div class="page-header"><h1>➕ Create Booking</h1><a href="/Booking" class="btn btn-secondary">← Back</a></div>
+
+<div class="form-card">
+    <form method="post">
+        <input type="hidden" name="bookingId" value="@ViewBag.BookingID" />
+        <div class="form-group"><label>Booking ID</label><input class="form-control" value="@ViewBag.BookingID" disabled /></div>
+        <div class="form-group"><label>Customer</label>
+            <select name="customerId" class="form-control" required>
+                @foreach (var c in customers) { <option value="@c.CustomerID">@c.CustomerID — @c.FullName</option> }
+            </select>
+        </div>
+        <div class="form-group"><label>Room</label>
+            <select name="roomId" class="form-control" required>
+                @foreach (var r in rooms) { <option value="@r.RoomID">@r.RoomID — @r.RoomName (@r.RoomTypeDisplay) ₹@r.Price</option> }
+            </select>
+        </div>
+        <div class="form-group"><label>Rental Type</label>
+            <select name="rentalType" class="form-control"><option value="0">By Day</option><option value="1">By Hour</option><option value="2">Flexible</option></select>
+        </div>
+        <div class="form-group"><label>Check-In</label><input type="datetime-local" name="checkIn" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required /></div>
+        <div class="form-group"><label>Check-Out</label><input type="datetime-local" name="checkOut" class="form-control" value="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm")" required /></div>
+        <div class="form-group"><label>Rental Price (₹)</label><input type="number" name="rentalPrice" class="form-control" required /></div>
+        <div class="form-group"><label>Deposit (₹)</label><input type="number" name="deposit" class="form-control" value="0" /></div>
+        <button type="submit" class="btn btn-success">📋 Create Booking</button>
+    </form>
+</div>

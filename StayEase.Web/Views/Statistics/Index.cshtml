@@ -1,0 +1,48 @@
+@{ ViewData["Title"] = "Statistics"; }
+
+<div class="page-header"><h1>📈 Statistics & Reports</h1></div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:25px;">
+    <div class="stat-card">
+        <h3 style="color:var(--accent);margin-top:0;">Revenue by Room Type</h3>
+        <div id="roomTypeChart" style="min-height:200px;color:var(--text-secondary);">Loading...</div>
+    </div>
+    <div class="stat-card">
+        <h3 style="color:var(--accent);margin-top:0;">Daily Revenue</h3>
+        <div style="display:flex;gap:10px;margin-bottom:15px;">
+            <input type="date" id="dateFrom" class="form-control" value="@DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd")" />
+            <input type="date" id="dateTo" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+            <button class="btn btn-primary btn-sm" onclick="loadDailyRevenue()">📊</button>
+        </div>
+        <div id="dailyChart" style="min-height:200px;color:var(--text-secondary);">Click Generate to load</div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    fetch('/Statistics/GetRevenueByRoomType')
+        .then(r => r.json())
+        .then(data => {
+            let html = '<table class="data-table"><thead><tr><th>Room Type</th><th>Revenue</th></tr></thead><tbody>';
+            let total = 0;
+            data.forEach(d => { html += `<tr><td><span class="badge ${d.type==='VIP'?'badge-vip':'badge-standard'}">${d.type}</span></td><td>₹${d.revenue.toLocaleString()}</td></tr>`; total += d.revenue; });
+            html += `</tbody><tfoot><tr><td><strong>Total</strong></td><td><strong style="color:#facc15">₹${total.toLocaleString()}</strong></td></tr></tfoot></table>`;
+            document.getElementById('roomTypeChart').innerHTML = html;
+        }).catch(() => { document.getElementById('roomTypeChart').innerHTML = '<p>No data available</p>'; });
+
+    function loadDailyRevenue() {
+        const from = document.getElementById('dateFrom').value;
+        const to = document.getElementById('dateTo').value;
+        fetch(`/Statistics/GetRevenueByDate?from=${from}&to=${to}`)
+            .then(r => r.json())
+            .then(data => {
+                if (!data.length) { document.getElementById('dailyChart').innerHTML = '<p>No revenue data for this period</p>'; return; }
+                let html = '<table class="data-table"><thead><tr><th>Date</th><th>Revenue</th></tr></thead><tbody>';
+                let total = 0;
+                data.forEach(d => { html += `<tr><td>${d.date}</td><td>₹${d.revenue.toLocaleString()}</td></tr>`; total += d.revenue; });
+                html += `</tbody><tfoot><tr><td><strong>Total</strong></td><td><strong style="color:#facc15">₹${total.toLocaleString()}</strong></td></tr></tfoot></table>`;
+                document.getElementById('dailyChart').innerHTML = html;
+            }).catch(() => { document.getElementById('dailyChart').innerHTML = '<p>Error loading data</p>'; });
+    }
+</script>
+}

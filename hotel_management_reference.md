@@ -602,5 +602,5 @@ HotelManagement.Web/            (ASP.NET MVC — Practical 05, 07)
 - [x] Implement Invoice/Billing (calculations + payment) ✅
 - [x] Implement Statistics & Reports (charts) ✅
 - [x] Implement Role-Based Access Control ✅
-- [ ] Build ASP.NET MVC web version (for Practical 05-07)
+- [x] Build ASP.NET MVC web version (for Practical 05-07) ✅
 - [ ] Deploy to cloud (for Practical 07)

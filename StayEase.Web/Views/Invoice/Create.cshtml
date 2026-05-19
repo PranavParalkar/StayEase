@@ -1,0 +1,51 @@
+@{ ViewData["Title"] = "Create Invoice";
+    var bookings = (List<StayEase.DTO.Booking>)ViewBag.Bookings;
+}
+
+<div class="page-header"><h1>➕ Create Invoice</h1><a href="/Invoice" class="btn btn-secondary">← Back</a></div>
+
+<div class="form-card">
+    <form method="post">
+        <input type="hidden" name="invoiceId" value="@ViewBag.InvoiceID" />
+        <div class="form-group"><label>Invoice ID</label><input class="form-control" value="@ViewBag.InvoiceID" disabled /></div>
+        <div class="form-group"><label>Booking</label>
+            <select name="bookingId" id="bookingSelect" class="form-control" required>
+                @foreach (var b in bookings) { <option value="@b.BookingID">@b.BookingID — Customer: @b.CustomerID</option> }
+            </select>
+        </div>
+        <div id="totals" style="margin:15px 0;padding:15px;background:var(--bg-card);border-radius:8px;">
+            <div style="color:var(--success);">Room Total: ₹<span id="roomTotal">0</span></div>
+            <div style="color:var(--accent);">Service Total: ₹<span id="svcTotal">0</span></div>
+            <div style="color:#facc15;font-size:1.2rem;font-weight:700;margin-top:8px;">Grand Total: ₹<span id="grandTotal">0</span></div>
+        </div>
+        <div class="form-group"><label>Discount %</label><input type="number" name="discount" id="discount" class="form-control" value="0" min="0" max="100" /></div>
+        <div class="form-group"><label>Surcharge %</label><input type="number" name="surcharge" id="surcharge" class="form-control" value="0" min="0" max="100" /></div>
+        <div class="form-group"><label>Payment Method</label>
+            <select name="paymentMethod" class="form-control"><option value="0">Cash</option><option value="1">Bank Transfer</option></select>
+        </div>
+        <button type="submit" class="btn btn-success">💰 Create Invoice</button>
+    </form>
+</div>
+
+@section Scripts {
+<script>
+    let roomT=0, svcT=0;
+    function loadTotals() {
+        const bid = document.getElementById('bookingSelect').value;
+        fetch('/Invoice/GetTotals?bookingId=' + bid)
+            .then(r => r.json())
+            .then(d => { roomT=d.roomTotal; svcT=d.serviceTotal; document.getElementById('roomTotal').textContent=roomT; document.getElementById('svcTotal').textContent=svcT; calc(); });
+    }
+    function calc() {
+        const disc = parseInt(document.getElementById('discount').value)||0;
+        const sur = parseInt(document.getElementById('surcharge').value)||0;
+        const sub = roomT + svcT;
+        const grand = sub + (sub*sur/100) - (sub*disc/100);
+        document.getElementById('grandTotal').textContent = Math.round(grand);
+    }
+    document.getElementById('bookingSelect').addEventListener('change', loadTotals);
+    document.getElementById('discount').addEventListener('input', calc);
+    document.getElementById('surcharge').addEventListener('input', calc);
+    loadTotals();
+</script>
+}

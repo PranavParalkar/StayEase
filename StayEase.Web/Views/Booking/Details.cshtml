@@ -1,0 +1,57 @@
+@model StayEase.DTO.Booking
+@{ ViewData["Title"] = "Booking Details";
+    var rooms = (List<StayEase.DTO.BookingRoom>)ViewBag.Rooms;
+    var services = (List<StayEase.DTO.BookingService>)ViewBag.Services;
+}
+
+<div class="page-header">
+    <h1>📋 Booking @Model.BookingID</h1>
+    <a href="/Booking" class="btn btn-secondary">← Back</a>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:25px;">
+    <div class="stat-card"><div class="stat-label">Customer</div><div class="stat-value" style="font-size:1.2rem;">@Model.CustomerID</div></div>
+    <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value" style="font-size:1.2rem;"><span class="badge @(Model.ProcessStatus==0?"badge-pending":"badge-processed")">@Model.StatusDisplay</span></div></div>
+    <div class="stat-card"><div class="stat-label">Booking Date</div><div class="stat-value" style="font-size:1rem;">@Model.BookingDate.ToString("yyyy-MM-dd HH:mm")</div></div>
+    <div class="stat-card"><div class="stat-label">Deposit</div><div class="stat-value" style="font-size:1.2rem;">₹@Model.Deposit.ToString("N0")</div></div>
+</div>
+
+<h2 style="color:var(--accent);margin-bottom:15px;">🛏 Booked Rooms</h2>
+<table class="data-table" style="margin-bottom:25px;">
+    <thead><tr><th>Room</th><th>Check-In</th><th>Check-Out</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+    @foreach (var r in rooms)
+    {
+        <tr>
+            <td>@r.RoomID</td><td>@r.CheckInDate.ToString("yyyy-MM-dd")</td>
+            <td>@(r.CheckOutDate?.ToString("yyyy-MM-dd") ?? "-")</td><td>₹@r.RentalPrice.ToString("N0")</td>
+            <td><span class="badge @(r.Status==0?"badge-pending":r.Status==1?"badge-available":"badge-processed")">@r.StatusDisplay</span></td>
+            <td>
+                @if (r.Status == 0) {
+                    <form method="post" asp-action="CheckIn" style="display:inline;">
+                        <input type="hidden" name="bookingId" value="@Model.BookingID" /><input type="hidden" name="roomId" value="@r.RoomID" /><input type="hidden" name="checkInDate" value="@r.CheckInDate.ToString("yyyy-MM-ddTHH:mm:ss")" />
+                        <button class="btn btn-success btn-sm">📥 Check-In</button>
+                    </form>
+                } else if (r.Status == 1) {
+                    <form method="post" asp-action="CheckOut" style="display:inline;">
+                        <input type="hidden" name="bookingId" value="@Model.BookingID" /><input type="hidden" name="roomId" value="@r.RoomID" /><input type="hidden" name="checkInDate" value="@r.CheckInDate.ToString("yyyy-MM-ddTHH:mm:ss")" />
+                        <button class="btn btn-purple btn-sm">📤 Check-Out</button>
+                    </form>
+                } else { <span style="color:var(--text-muted);">Completed</span> }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h2 style="color:var(--accent);margin-bottom:15px;">🍽 Services Used</h2>
+<table class="data-table">
+    <thead><tr><th>Service</th><th>Date</th><th>Qty</th><th>Price</th></tr></thead>
+    <tbody>
+    @foreach (var s in services)
+    {
+        <tr><td>@s.ServiceID</td><td>@s.UsageDate.ToString("yyyy-MM-dd")</td><td>@s.Quantity</td><td>₹@s.Price.ToString("N0")</td></tr>
+    }
+    @if (!services.Any()) { <tr><td colspan="4" style="text-align:center;color:var(--text-muted);">No services added</td></tr> }
+    </tbody>
+</table>

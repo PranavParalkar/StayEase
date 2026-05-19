@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StayEase.DTO")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5cf71861c6c32af2bc179bdeec7cb7f17b39f3dc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53467e7929b5e3c08663fe738b9741c0383ef214")]
 [assembly: System.Reflection.AssemblyProductAttribute("StayEase.DTO")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StayEase.DTO")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
