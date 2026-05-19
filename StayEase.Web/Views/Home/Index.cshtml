@@ -1,8 +1,43 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="page-header">
+    <h1>Dashboard</h1>
+</div>
+
+<div class="stat-grid">
+    <div class="stat-card">
+        <div class="stat-icon">🛏</div>
+        <div class="stat-value">@ViewBag.TotalRooms</div>
+        <div class="stat-label">Total Rooms</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">✅</div>
+        <div class="stat-value">@ViewBag.AvailableRooms</div>
+        <div class="stat-label">Available Rooms</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">👤</div>
+        <div class="stat-value">@ViewBag.TotalCustomers</div>
+        <div class="stat-label">Total Customers</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">📋</div>
+        <div class="stat-value">@ViewBag.TotalBookings</div>
+        <div class="stat-label">Total Bookings</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-value">@ViewBag.PendingBookings</div>
+        <div class="stat-label">Pending Bookings</div>
+    </div>
+</div>
+
+<div style="background: var(--bg-secondary); border-radius: 12px; padding: 30px; border: 1px solid var(--border);">
+    <h2 style="color: var(--accent); margin-top: 0;">Welcome to StayEase</h2>
+    <p style="color: var(--text-secondary); line-height: 1.6;">
+        StayEase Hotel Management System helps you manage rooms, customers, bookings, services, and invoices efficiently.
+        Use the sidebar to navigate between modules. Your access is controlled by your assigned role permissions.
+    </p>
 </div>
