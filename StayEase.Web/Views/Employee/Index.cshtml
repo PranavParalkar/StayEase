@@ -2,14 +2,14 @@
 @{ ViewData["Title"] = "Employees"; }
 
 <div class="page-header">
-    <h1>👨‍💼 Employee Management</h1>
-    <a href="/Employee/Create" class="btn btn-success">➕ Add Employee</a>
+    <h1>Employee Management</h1>
+    <a href="/Employee/Create" class="btn btn-success"><i data-lucide="plus" style="width:16px;height:16px;"></i> Add Employee</a>
 </div>
 
 <div class="toolbar">
     <form method="get" style="display:flex;gap:12px;width:100%;">
         <input type="text" name="search" class="form-control" placeholder="Search employees..." value="@ViewBag.Search" style="flex:1;" />
-        <button type="submit" class="btn btn-primary btn-sm">🔍 Search</button>
+        <button type="submit" class="btn btn-primary btn-sm"><i data-lucide="search" style="width:14px;height:14px;"></i> Search</button>
     </form>
 </div>
 
@@ -17,25 +17,23 @@
     <table class="data-table">
         <thead><tr><th>ID</th><th>Name</th><th>Gender</th><th>Position</th><th>Email</th><th>Daily Wage</th><th>Hire Date</th><th>Actions</th></tr></thead>
         <tbody>
-        @if (!Model.Any()) { <tr><td colspan="8"><div class="empty-state"><div class="empty-icon">👨‍💼</div><p>No employees found</p></div></td></tr> }
+        @if (!Model.Any()) { <tr><td colspan="8"><div class="empty-state"><p>No employees found</p></div></td></tr> }
         @foreach (var e in Model)
         {
             <tr>
                 <td style="color:var(--text-muted);font-size:0.82rem;">@e.EmployeeID</td>
-                <td><strong>@e.FullName</strong></td>
-                <td>@e.GenderDisplay</td>
+                <td><strong>@e.FullName</strong></td><td>@e.GenderDisplay</td>
                 <td><span class="badge @(e.Position==0?"badge-vip":"badge-standard")">@e.PositionDisplay</span></td>
                 <td style="color:var(--text-secondary);">@e.Email</td>
                 <td style="font-weight:600;">₹@e.DailyWage.ToString("N0")</td>
                 <td style="color:var(--text-secondary);">@(e.HireDate?.ToString("yyyy-MM-dd") ?? "—")</td>
-                <td>
-                    <div class="action-row">
-                        <a href="/Employee/Edit/@e.EmployeeID" class="btn btn-primary btn-sm">✏️</a>
-                        <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@e.EmployeeID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">🗑️</button></form>
-                    </div>
-                </td>
+                <td><div class="action-row">
+                    <a href="/Employee/Edit/@e.EmployeeID" class="btn btn-primary btn-sm"><i data-lucide="pencil" style="width:14px;height:14px;"></i></a>
+                    <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@e.EmployeeID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')"><i data-lucide="trash-2" style="width:14px;height:14px;"></i></button></form>
+                </div></td>
             </tr>
         }
         </tbody>
     </table>
 </div>
+<script>lucide.createIcons();</script>

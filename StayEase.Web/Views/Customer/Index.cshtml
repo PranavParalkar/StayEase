@@ -2,14 +2,14 @@
 @{ ViewData["Title"] = "Customers"; }
 
 <div class="page-header">
-    <h1>👤 Customer Management</h1>
-    <a href="/Customer/Create" class="btn btn-success">➕ Add Customer</a>
+    <h1>Customer Management</h1>
+    <a href="/Customer/Create" class="btn btn-success"><i data-lucide="plus" style="width:16px;height:16px;"></i> Add Customer</a>
 </div>
 
 <div class="toolbar">
     <form method="get" style="display:flex;gap:12px;width:100%;">
         <input type="text" name="search" class="form-control" placeholder="Search by name, ID card, or phone..." value="@ViewBag.Search" style="flex:1;" />
-        <button type="submit" class="btn btn-primary btn-sm">🔍 Search</button>
+        <button type="submit" class="btn btn-primary btn-sm"><i data-lucide="search" style="width:14px;height:14px;"></i> Search</button>
     </form>
 </div>
 
@@ -17,25 +17,21 @@
     <table class="data-table">
         <thead><tr><th>ID</th><th>Name</th><th>ID Card</th><th>Gender</th><th>Phone</th><th>Nationality</th><th>DOB</th><th>Actions</th></tr></thead>
         <tbody>
-        @if (!Model.Any()) { <tr><td colspan="8"><div class="empty-state"><div class="empty-icon">👤</div><p>No customers found</p></div></td></tr> }
+        @if (!Model.Any()) { <tr><td colspan="8"><div class="empty-state"><p>No customers found</p></div></td></tr> }
         @foreach (var c in Model)
         {
             <tr>
                 <td style="color:var(--text-muted);font-size:0.82rem;">@c.CustomerID</td>
-                <td><strong>@c.FullName</strong></td>
-                <td>@c.IDCard</td>
-                <td>@c.GenderDisplay</td>
-                <td>@c.Phone</td>
+                <td><strong>@c.FullName</strong></td><td>@c.IDCard</td><td>@c.GenderDisplay</td><td>@c.Phone</td>
                 <td style="color:var(--text-secondary);">@c.Nationality</td>
                 <td style="color:var(--text-secondary);">@(c.DateOfBirth?.ToString("yyyy-MM-dd") ?? "—")</td>
-                <td>
-                    <div class="action-row">
-                        <a href="/Customer/Edit/@c.CustomerID" class="btn btn-primary btn-sm">✏️</a>
-                        <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@c.CustomerID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">🗑️</button></form>
-                    </div>
-                </td>
+                <td><div class="action-row">
+                    <a href="/Customer/Edit/@c.CustomerID" class="btn btn-primary btn-sm"><i data-lucide="pencil" style="width:14px;height:14px;"></i></a>
+                    <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@c.CustomerID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')"><i data-lucide="trash-2" style="width:14px;height:14px;"></i></button></form>
+                </div></td>
             </tr>
         }
         </tbody>
     </table>
 </div>
+<script>lucide.createIcons();</script>

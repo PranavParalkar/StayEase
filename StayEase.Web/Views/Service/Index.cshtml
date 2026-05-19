@@ -2,8 +2,8 @@
 @{ ViewData["Title"] = "Services"; }
 
 <div class="page-header">
-    <h1>🍽 Service Management</h1>
-    <a href="/Service/Create" class="btn btn-success">➕ Add Service</a>
+    <h1>Service Management</h1>
+    <a href="/Service/Create" class="btn btn-success"><i data-lucide="plus" style="width:16px;height:16px;"></i> Add Service</a>
 </div>
 
 <div class="toolbar">
@@ -16,7 +16,7 @@
             <option value="Entertainment" selected="@(ViewBag.Category=="Entertainment")">Entertainment</option>
             <option value="Party Services" selected="@(ViewBag.Category=="Party Services")">Party Services</option>
         </select>
-        <button type="submit" class="btn btn-primary btn-sm">🔍</button>
+        <button type="submit" class="btn btn-primary btn-sm"><i data-lucide="search" style="width:14px;height:14px;"></i></button>
     </form>
 </div>
 
@@ -24,7 +24,7 @@
     <table class="data-table">
         <thead><tr><th>ID</th><th>Name</th><th>Category</th><th>Price</th><th>Actions</th></tr></thead>
         <tbody>
-        @if (!Model.Any()) { <tr><td colspan="5"><div class="empty-state"><div class="empty-icon">🍽</div><p>No services found</p></div></td></tr> }
+        @if (!Model.Any()) { <tr><td colspan="5"><div class="empty-state"><p>No services found</p></div></td></tr> }
         @foreach (var s in Model)
         {
             <tr>
@@ -32,14 +32,13 @@
                 <td><strong>@s.ServiceName</strong></td>
                 <td><span class="badge badge-standard">@s.ServiceType</span></td>
                 <td style="font-weight:600;">₹@s.Price.ToString("N0")</td>
-                <td>
-                    <div class="action-row">
-                        <a href="/Service/Edit/@s.ServiceID" class="btn btn-primary btn-sm">✏️</a>
-                        <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@s.ServiceID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">🗑️</button></form>
-                    </div>
-                </td>
+                <td><div class="action-row">
+                    <a href="/Service/Edit/@s.ServiceID" class="btn btn-primary btn-sm"><i data-lucide="pencil" style="width:14px;height:14px;"></i></a>
+                    <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@s.ServiceID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')"><i data-lucide="trash-2" style="width:14px;height:14px;"></i></button></form>
+                </div></td>
             </tr>
         }
         </tbody>
     </table>
 </div>
+<script>lucide.createIcons();</script>

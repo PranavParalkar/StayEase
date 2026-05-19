@@ -5,8 +5,8 @@
 }
 
 <div class="page-header">
-    <h1>📋 Booking @Model.BookingID</h1>
-    <a href="/Booking" class="btn btn-secondary">← Back to Bookings</a>
+    <h1>Booking @Model.BookingID</h1>
+    <a href="/Booking" class="btn btn-secondary"><i data-lucide="arrow-left" style="width:14px;height:14px;"></i> Back to Bookings</a>
 </div>
 
 <div class="detail-grid">
@@ -33,14 +33,14 @@
                     @if (r.Status == 0) {
                         <form method="post" asp-action="CheckIn" style="display:inline;">
                             <input type="hidden" name="bookingId" value="@Model.BookingID" /><input type="hidden" name="roomId" value="@r.RoomID" /><input type="hidden" name="checkInDate" value="@r.CheckInDate.ToString("yyyy-MM-ddTHH:mm:ss")" />
-                            <button class="btn btn-success btn-sm">📥 Check-In</button>
+                            <button class="btn btn-success btn-sm"><i data-lucide="log-in" style="width:14px;height:14px;"></i> Check-In</button>
                         </form>
                     } else if (r.Status == 1) {
                         <form method="post" asp-action="CheckOut" style="display:inline;">
                             <input type="hidden" name="bookingId" value="@Model.BookingID" /><input type="hidden" name="roomId" value="@r.RoomID" /><input type="hidden" name="checkInDate" value="@r.CheckInDate.ToString("yyyy-MM-ddTHH:mm:ss")" />
-                            <button class="btn btn-purple btn-sm">📤 Check-Out</button>
+                            <button class="btn btn-purple btn-sm"><i data-lucide="log-out" style="width:14px;height:14px;"></i> Check-Out</button>
                         </form>
-                    } else { <span style="color:var(--success);font-weight:500;">✓ Completed</span> }
+                    } else { <span style="color:var(--success);font-weight:500;">Completed</span> }
                 </td>
             </tr>
         }
@@ -53,11 +53,9 @@
     <table class="data-table">
         <thead><tr><th>Service</th><th>Date</th><th>Qty</th><th>Price</th></tr></thead>
         <tbody>
-        @foreach (var s in services)
-        {
-            <tr><td>@s.ServiceID</td><td>@s.UsageDate.ToString("yyyy-MM-dd")</td><td>@s.Quantity</td><td style="font-weight:600;">₹@s.Price.ToString("N0")</td></tr>
-        }
-        @if (!services.Any()) { <tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🍽</div><p>No services added yet</p></div></td></tr> }
+        @foreach (var s in services) { <tr><td>@s.ServiceID</td><td>@s.UsageDate.ToString("yyyy-MM-dd")</td><td>@s.Quantity</td><td style="font-weight:600;">₹@s.Price.ToString("N0")</td></tr> }
+        @if (!services.Any()) { <tr><td colspan="4"><div class="empty-state"><p>No services added yet</p></div></td></tr> }
         </tbody>
     </table>
 </div>
+<script>lucide.createIcons();</script>

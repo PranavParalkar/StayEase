@@ -2,8 +2,8 @@
 @{ ViewData["Title"] = "Rooms"; }
 
 <div class="page-header">
-    <h1>🛏 Room Management</h1>
-    <a href="/Room/Create" class="btn btn-success">➕ Add Room</a>
+    <h1>Room Management</h1>
+    <a href="/Room/Create" class="btn btn-success"><i data-lucide="plus" style="width:16px;height:16px;"></i> Add Room</a>
 </div>
 
 <div class="toolbar">
@@ -21,20 +21,15 @@
             <option value="0" selected="@(ViewBag.Type?.ToString()=="0")">VIP</option>
             <option value="1" selected="@(ViewBag.Type?.ToString()=="1")">Standard</option>
         </select>
-        <button type="submit" class="btn btn-primary btn-sm">🔍 Search</button>
+        <button type="submit" class="btn btn-primary btn-sm"><i data-lucide="search" style="width:14px;height:14px;"></i> Search</button>
     </form>
 </div>
 
 <div class="table-wrapper">
     <table class="data-table">
-        <thead>
-            <tr><th>ID</th><th>Name</th><th>Type</th><th>Detail</th><th>Price</th><th>Status</th><th>Condition</th><th>Actions</th></tr>
-        </thead>
+        <thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Detail</th><th>Price</th><th>Status</th><th>Condition</th><th>Actions</th></tr></thead>
         <tbody>
-        @if (!Model.Any())
-        {
-            <tr><td colspan="8"><div class="empty-state"><div class="empty-icon">🛏</div><p>No rooms found</p></div></td></tr>
-        }
+        @if (!Model.Any()) { <tr><td colspan="8"><div class="empty-state"><p>No rooms found</p></div></td></tr> }
         @foreach (var r in Model)
         {
             string badgeClass = r.Status switch { 0 => "badge-available", 1 => "badge-occupied", 2 => "badge-cleaning", _ => "badge-repair" };
@@ -49,11 +44,8 @@
                 <td style="color:var(--text-secondary);">@r.ConditionDisplay</td>
                 <td>
                     <div class="action-row">
-                        <a href="/Room/Edit/@r.RoomID" class="btn btn-primary btn-sm">✏️</a>
-                        <form method="post" asp-action="Delete" style="display:inline;">
-                            <input type="hidden" name="id" value="@r.RoomID" />
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('Delete this room?')">🗑️</button>
-                        </form>
+                        <a href="/Room/Edit/@r.RoomID" class="btn btn-primary btn-sm"><i data-lucide="pencil" style="width:14px;height:14px;"></i></a>
+                        <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@r.RoomID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete this room?')"><i data-lucide="trash-2" style="width:14px;height:14px;"></i></button></form>
                     </div>
                 </td>
             </tr>
@@ -61,3 +53,4 @@
         </tbody>
     </table>
 </div>
+<script>lucide.createIcons();</script>

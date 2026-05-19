@@ -3,33 +3,33 @@
 }
 
 <div class="page-header">
-    <h1>📊 Dashboard</h1>
+    <h1>Dashboard</h1>
     <span style="color: var(--text-muted); font-size: 0.88rem;">@DateTime.Now.ToString("dddd, MMMM dd yyyy")</span>
 </div>
 
 <div class="stat-grid">
     <div class="stat-card">
-        <div class="stat-icon">🛏</div>
+        <div class="stat-icon"><i data-lucide="bed-double" style="width:32px;height:32px;color:var(--accent);"></i></div>
         <div class="stat-value">@ViewBag.TotalRooms</div>
         <div class="stat-label">Total Rooms</div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon">✅</div>
+        <div class="stat-icon"><i data-lucide="check-circle" style="width:32px;height:32px;color:var(--success);"></i></div>
         <div class="stat-value">@ViewBag.AvailableRooms</div>
         <div class="stat-label">Available</div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon">👤</div>
+        <div class="stat-icon"><i data-lucide="users" style="width:32px;height:32px;color:var(--pink);"></i></div>
         <div class="stat-value">@ViewBag.TotalCustomers</div>
         <div class="stat-label">Customers</div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon">📋</div>
+        <div class="stat-icon"><i data-lucide="calendar-check" style="width:32px;height:32px;color:var(--purple);"></i></div>
         <div class="stat-value">@ViewBag.TotalBookings</div>
         <div class="stat-label">Bookings</div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon">⏳</div>
+        <div class="stat-icon"><i data-lucide="clock" style="width:32px;height:32px;color:var(--warning);"></i></div>
         <div class="stat-value">@ViewBag.PendingBookings</div>
         <div class="stat-label">Pending</div>
     </div>
@@ -42,3 +42,5 @@
         Navigate using the sidebar. Access is controlled by your assigned role permissions.
     </p>
 </div>
+
+<script>lucide.createIcons();</script>

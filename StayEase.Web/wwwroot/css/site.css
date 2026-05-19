@@ -142,11 +142,18 @@ body {
 
 .sidebar-nav li a.active::before { opacity: 1; }
 
-.sidebar-nav li a .icon {
-    font-size: 1.15rem;
-    width: 26px;
-    text-align: center;
+.sidebar-nav li a .nav-icon,
+.sidebar-nav li a i[data-lucide] {
+    width: 20px;
+    height: 20px;
     flex-shrink: 0;
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.sidebar-nav li a:hover i[data-lucide],
+.sidebar-nav li a.active i[data-lucide] {
+    opacity: 1;
 }
 
 .sidebar-user {
