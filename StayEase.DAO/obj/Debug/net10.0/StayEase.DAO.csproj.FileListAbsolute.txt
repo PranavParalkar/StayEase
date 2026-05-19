@@ -1,0 +1,16 @@
+C:\StayEase\StayEase.DAO\bin\Debug\net10.0\StayEase.DAO.deps.json
+C:\StayEase\StayEase.DAO\bin\Debug\net10.0\StayEase.DAO.dll
+C:\StayEase\StayEase.DAO\bin\Debug\net10.0\StayEase.DAO.pdb
+C:\StayEase\StayEase.DAO\bin\Debug\net10.0\StayEase.DTO.dll
+C:\StayEase\StayEase.DAO\bin\Debug\net10.0\StayEase.DTO.pdb
+C:\StayEase\StayEase.DAO\obj\Debug\net10.0\StayEase.DAO.csproj.AssemblyReference.cache
+C:\StayEase\StayEase.DAO\obj\Debug\net10.0\StayEase.DAO.GeneratedMSBuildEditorConfig.editorconfig
+C:\StayEase\StayEase.DAO\obj\Debug\net10.0\StayEase.DAO.AssemblyInfoInputs.cache
+C:\StayEase\StayEase.DAO\obj\Debug\net10.0\StayEase.DAO.AssemblyInfo.cs
+C:\StayEase\StayEase.DAO\obj\Debug\net10.0\StayEase.DAO.csproj.CoreCompileInputs.cache
+C:\StayEase\StayEase.DAO\obj\Debug\net10.0\StayEase.DAO.sourcelink.json
+C:\StayEase\StayEase.DAO\obj\Debug\net10.0\StayEase.DD5A6052.Up2Date
+C:\StayEase\StayEase.DAO\obj\Debug\net10.0\StayEase.DAO.dll
+C:\StayEase\StayEase.DAO\obj\Debug\net10.0\refint\StayEase.DAO.dll
+C:\StayEase\StayEase.DAO\obj\Debug\net10.0\StayEase.DAO.pdb
+C:\StayEase\StayEase.DAO\obj\Debug\net10.0\ref\StayEase.DAO.dll

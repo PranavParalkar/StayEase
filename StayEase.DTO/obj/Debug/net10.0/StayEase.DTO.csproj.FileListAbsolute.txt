@@ -1,0 +1,12 @@
+C:\StayEase\StayEase.DTO\bin\Debug\net10.0\StayEase.DTO.deps.json
+C:\StayEase\StayEase.DTO\bin\Debug\net10.0\StayEase.DTO.dll
+C:\StayEase\StayEase.DTO\bin\Debug\net10.0\StayEase.DTO.pdb
+C:\StayEase\StayEase.DTO\obj\Debug\net10.0\StayEase.DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\StayEase\StayEase.DTO\obj\Debug\net10.0\StayEase.DTO.AssemblyInfoInputs.cache
+C:\StayEase\StayEase.DTO\obj\Debug\net10.0\StayEase.DTO.AssemblyInfo.cs
+C:\StayEase\StayEase.DTO\obj\Debug\net10.0\StayEase.DTO.csproj.CoreCompileInputs.cache
+C:\StayEase\StayEase.DTO\obj\Debug\net10.0\StayEase.DTO.sourcelink.json
+C:\StayEase\StayEase.DTO\obj\Debug\net10.0\StayEase.DTO.dll
+C:\StayEase\StayEase.DTO\obj\Debug\net10.0\refint\StayEase.DTO.dll
+C:\StayEase\StayEase.DTO\obj\Debug\net10.0\StayEase.DTO.pdb
+C:\StayEase\StayEase.DTO\obj\Debug\net10.0\ref\StayEase.DTO.dll
