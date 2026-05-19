@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="StayEase.BUS/StayEase.BUS.csproj" />
+  <Project Path="StayEase.DAO/StayEase.DAO.csproj" />
+  <Project Path="StayEase.DTO/StayEase.DTO.csproj" />
+  <Project Path="StayEase.WinForms/StayEase.WinForms.csproj" />
+</Solution>
