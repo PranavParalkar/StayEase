@@ -1,0 +1,55 @@
+@model List<StayEase.DTO.Room>
+@{ ViewData["Title"] = "Rooms"; }
+
+<div class="page-header">
+    <h1>🛏 Room Management</h1>
+    <a href="/Room/Create" class="btn btn-success">➕ Add Room</a>
+</div>
+
+<div class="toolbar">
+    <form method="get" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <input type="text" name="search" class="form-control" placeholder="Search rooms..." value="@ViewBag.Search" />
+        <select name="status" class="form-control" onchange="this.form.submit()">
+            <option value="">All Status</option>
+            <option value="0" selected="@(ViewBag.Status?.ToString()=="0")">Available</option>
+            <option value="1" selected="@(ViewBag.Status?.ToString()=="1")">Occupied</option>
+            <option value="2" selected="@(ViewBag.Status?.ToString()=="2")">Not Cleaned</option>
+            <option value="3" selected="@(ViewBag.Status?.ToString()=="3")">Under Repair</option>
+        </select>
+        <select name="type" class="form-control" onchange="this.form.submit()">
+            <option value="">All Types</option>
+            <option value="0" selected="@(ViewBag.Type?.ToString()=="0")">VIP</option>
+            <option value="1" selected="@(ViewBag.Type?.ToString()=="1")">Standard</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-sm">🔍 Search</button>
+    </form>
+</div>
+
+<table class="data-table">
+    <thead>
+        <tr><th>ID</th><th>Name</th><th>Type</th><th>Detail</th><th>Price</th><th>Status</th><th>Condition</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+    @foreach (var r in Model)
+    {
+        string badgeClass = r.Status switch { 0 => "badge-available", 1 => "badge-occupied", 2 => "badge-cleaning", _ => "badge-repair" };
+        string typeBadge = r.RoomType == 0 ? "badge-vip" : "badge-standard";
+        <tr>
+            <td>@r.RoomID</td>
+            <td><strong>@r.RoomName</strong></td>
+            <td><span class="badge @typeBadge">@r.RoomTypeDisplay</span></td>
+            <td>@r.RoomDetailDisplay</td>
+            <td>₹@r.Price.ToString("N0")</td>
+            <td><span class="badge @badgeClass">@r.StatusDisplay</span></td>
+            <td>@r.ConditionDisplay</td>
+            <td>
+                <a href="/Room/Edit/@r.RoomID" class="btn btn-primary btn-sm">✏️</a>
+                <form method="post" asp-action="Delete" style="display:inline;">
+                    <input type="hidden" name="id" value="@r.RoomID" />
+                    <button class="btn btn-danger btn-sm" onclick="return confirm('Delete this room?')">🗑️</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

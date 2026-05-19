@@ -1,0 +1,32 @@
+@model List<StayEase.DTO.Customer>
+@{ ViewData["Title"] = "Customers"; }
+
+<div class="page-header">
+    <h1>👤 Customer Management</h1>
+    <a href="/Customer/Create" class="btn btn-success">➕ Add Customer</a>
+</div>
+
+<div class="toolbar">
+    <form method="get" style="display:flex;gap:10px;">
+        <input type="text" name="search" class="form-control" placeholder="Search by name, ID card, phone..." value="@ViewBag.Search" />
+        <button type="submit" class="btn btn-primary btn-sm">🔍 Search</button>
+    </form>
+</div>
+
+<table class="data-table">
+    <thead><tr><th>ID</th><th>Name</th><th>ID Card</th><th>Gender</th><th>Phone</th><th>Nationality</th><th>DOB</th><th>Actions</th></tr></thead>
+    <tbody>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.CustomerID</td><td><strong>@c.FullName</strong></td><td>@c.IDCard</td>
+            <td>@c.GenderDisplay</td><td>@c.Phone</td><td>@c.Nationality</td>
+            <td>@(c.DateOfBirth?.ToString("yyyy-MM-dd") ?? "-")</td>
+            <td>
+                <a href="/Customer/Edit/@c.CustomerID" class="btn btn-primary btn-sm">✏️</a>
+                <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@c.CustomerID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">🗑️</button></form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
