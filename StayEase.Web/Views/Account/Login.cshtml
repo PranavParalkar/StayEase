@@ -5,25 +5,30 @@
 
 <div class="login-wrapper">
     <div class="login-card">
-        <h1>🏨 StayEase</h1>
+        <div style="text-align:center;margin-bottom:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="url(#grad1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#38bdf8"/><stop offset="100%" style="stop-color:#818cf8"/></linearGradient></defs>
+                <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/>
+            </svg>
+        </div>
+        <h1>StayEase</h1>
         <p class="subtitle">Hotel Management System</p>
 
         @if (ViewBag.Error != null)
         {
-            <div class="alert alert-error">❌ @ViewBag.Error</div>
+            <div class="alert alert-error">@ViewBag.Error</div>
         }
 
         <form method="post" asp-action="Login">
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="username" class="form-control" placeholder="Enter username" required autofocus />
+                <input type="text" name="username" class="form-control" placeholder="Enter your username" required autofocus />
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Enter password" required />
+                <input type="password" name="password" class="form-control" placeholder="Enter your password" required />
             </div>
             <button type="submit" class="btn btn-primary">Sign In</button>
         </form>
-        <p class="hint">Default credentials: admin / admin123</p>
     </div>
 </div>

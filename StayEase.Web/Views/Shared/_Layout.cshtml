@@ -2,6 +2,12 @@
     var permissions = User.FindFirst("Permissions")?.Value ?? "";
     var permSet = new HashSet<string>(permissions.Split(',', StringSplitOptions.RemoveEmptyEntries));
     bool HasPerm(string fid) => permSet.Contains(fid);
+    var currentCtrl = ViewContext.RouteData.Values["controller"]?.ToString();
+    string initials = "";
+    if (User.Identity?.Name != null) {
+        var parts = User.Identity.Name.Split(' ');
+        initials = parts.Length > 1 ? $"{parts[0][0]}{parts[^1][0]}" : parts[0][..1];
+    }
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -9,8 +15,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] — StayEase</title>
-    <meta name="description" content="StayEase Hotel Management System — Web Application" />
+    <meta name="description" content="StayEase Hotel Management System" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 @if (User.Identity?.IsAuthenticated == true)
@@ -18,31 +26,36 @@
     <div class="app-wrapper">
         <aside class="sidebar">
             <div class="sidebar-brand">
-                <h2>🏨 StayEase</h2>
+                <h2><i data-lucide="star" style="width:20px;height:20px;display:inline;vertical-align:middle;"></i> StayEase</h2>
                 <small>Hotel Management</small>
             </div>
             <ul class="sidebar-nav">
-                <li><a href="/" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")"><span class="icon">📊</span> Dashboard</a></li>
-                @if (HasPerm("F001")) { <li><a href="/Room" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Room" ? "active" : "")"><span class="icon">🛏</span> Rooms</a></li> }
-                @if (HasPerm("F002")) { <li><a href="/Service" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Service" ? "active" : "")"><span class="icon">🍽</span> Services</a></li> }
-                @if (HasPerm("F003")) { <li><a href="/Customer" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Customer" ? "active" : "")"><span class="icon">👤</span> Customers</a></li> }
-                @if (HasPerm("F004")) { <li><a href="/Employee" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Employee" ? "active" : "")"><span class="icon">👨‍💼</span> Employees</a></li> }
-                @if (HasPerm("F006")) { <li><a href="/Booking" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Booking" ? "active" : "")"><span class="icon">📋</span> Bookings</a></li> }
-                @if (HasPerm("F007")) { <li><a href="/Invoice" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")"><span class="icon">💰</span> Invoices</a></li> }
-                @if (HasPerm("F008")) { <li><a href="/Statistics" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Statistics" ? "active" : "")"><span class="icon">📈</span> Statistics</a></li> }
+                <li><a href="/" class="@(currentCtrl == "Home" ? "active" : "")"><i data-lucide="layout-dashboard" class="nav-icon"></i> Dashboard</a></li>
+                @if (HasPerm("F001")) { <li><a href="/Room" class="@(currentCtrl == "Room" ? "active" : "")"><i data-lucide="bed-double" class="nav-icon"></i> Rooms</a></li> }
+                @if (HasPerm("F002")) { <li><a href="/Service" class="@(currentCtrl == "Service" ? "active" : "")"><i data-lucide="concierge-bell" class="nav-icon"></i> Services</a></li> }
+                @if (HasPerm("F003")) { <li><a href="/Customer" class="@(currentCtrl == "Customer" ? "active" : "")"><i data-lucide="users" class="nav-icon"></i> Customers</a></li> }
+                @if (HasPerm("F004")) { <li><a href="/Employee" class="@(currentCtrl == "Employee" ? "active" : "")"><i data-lucide="user-check" class="nav-icon"></i> Employees</a></li> }
+                @if (HasPerm("F006")) { <li><a href="/Booking" class="@(currentCtrl == "Booking" ? "active" : "")"><i data-lucide="calendar-check" class="nav-icon"></i> Bookings</a></li> }
+                @if (HasPerm("F007")) { <li><a href="/Invoice" class="@(currentCtrl == "Invoice" ? "active" : "")"><i data-lucide="receipt" class="nav-icon"></i> Invoices</a></li> }
+                @if (HasPerm("F008")) { <li><a href="/Statistics" class="@(currentCtrl == "Statistics" ? "active" : "")"><i data-lucide="bar-chart-3" class="nav-icon"></i> Statistics</a></li> }
             </ul>
             <div class="sidebar-user">
-                <div class="user-name">@User.Identity.Name</div>
-                <div class="user-role">@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</div>
+                <div class="user-info">
+                    <div class="user-avatar">@initials.ToUpper()</div>
+                    <div>
+                        <div class="user-name">@User.Identity.Name</div>
+                        <div class="user-role">@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</div>
+                    </div>
+                </div>
                 <form asp-controller="Account" asp-action="Logout" method="post">
-                    <button type="submit" class="btn btn-logout btn-sm">🚪 Logout</button>
+                    <button type="submit" class="btn btn-logout btn-sm"><i data-lucide="log-out" style="width:14px;height:14px;"></i> Sign Out</button>
                 </form>
             </div>
         </aside>
-        <main class="main-content">
+        <main class="main-content fade-in">
             @if (TempData["Success"] != null)
             {
-                <div class="alert alert-success">✅ @TempData["Success"]</div>
+                <div class="alert alert-success">@TempData["Success"]</div>
             }
             @RenderBody()
         </main>
@@ -53,6 +66,7 @@ else
     @RenderBody()
 }
 
+<script>lucide.createIcons();</script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

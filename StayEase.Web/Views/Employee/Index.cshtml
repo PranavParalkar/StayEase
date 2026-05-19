@@ -7,27 +7,35 @@
 </div>
 
 <div class="toolbar">
-    <form method="get" style="display:flex;gap:10px;">
-        <input type="text" name="search" class="form-control" placeholder="Search employees..." value="@ViewBag.Search" />
+    <form method="get" style="display:flex;gap:12px;width:100%;">
+        <input type="text" name="search" class="form-control" placeholder="Search employees..." value="@ViewBag.Search" style="flex:1;" />
         <button type="submit" class="btn btn-primary btn-sm">🔍 Search</button>
     </form>
 </div>
 
-<table class="data-table">
-    <thead><tr><th>ID</th><th>Name</th><th>Gender</th><th>Position</th><th>Email</th><th>Daily Wage</th><th>Hire Date</th><th>Actions</th></tr></thead>
-    <tbody>
-    @foreach (var e in Model)
-    {
-        <tr>
-            <td>@e.EmployeeID</td><td><strong>@e.FullName</strong></td><td>@e.GenderDisplay</td>
-            <td><span class="badge @(e.Position==0?"badge-vip":"badge-standard")">@e.PositionDisplay</span></td>
-            <td>@e.Email</td><td>₹@e.DailyWage.ToString("N0")</td>
-            <td>@(e.HireDate?.ToString("yyyy-MM-dd") ?? "-")</td>
-            <td>
-                <a href="/Employee/Edit/@e.EmployeeID" class="btn btn-primary btn-sm">✏️</a>
-                <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@e.EmployeeID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">🗑️</button></form>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class="table-wrapper">
+    <table class="data-table">
+        <thead><tr><th>ID</th><th>Name</th><th>Gender</th><th>Position</th><th>Email</th><th>Daily Wage</th><th>Hire Date</th><th>Actions</th></tr></thead>
+        <tbody>
+        @if (!Model.Any()) { <tr><td colspan="8"><div class="empty-state"><div class="empty-icon">👨‍💼</div><p>No employees found</p></div></td></tr> }
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td style="color:var(--text-muted);font-size:0.82rem;">@e.EmployeeID</td>
+                <td><strong>@e.FullName</strong></td>
+                <td>@e.GenderDisplay</td>
+                <td><span class="badge @(e.Position==0?"badge-vip":"badge-standard")">@e.PositionDisplay</span></td>
+                <td style="color:var(--text-secondary);">@e.Email</td>
+                <td style="font-weight:600;">₹@e.DailyWage.ToString("N0")</td>
+                <td style="color:var(--text-secondary);">@(e.HireDate?.ToString("yyyy-MM-dd") ?? "—")</td>
+                <td>
+                    <div class="action-row">
+                        <a href="/Employee/Edit/@e.EmployeeID" class="btn btn-primary btn-sm">✏️</a>
+                        <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@e.EmployeeID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">🗑️</button></form>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

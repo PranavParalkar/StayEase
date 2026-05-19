@@ -7,8 +7,8 @@
 </div>
 
 <div class="toolbar">
-    <form method="get" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-        <input type="text" name="search" class="form-control" placeholder="Search rooms..." value="@ViewBag.Search" />
+    <form method="get" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;width:100%;">
+        <input type="text" name="search" class="form-control" placeholder="Search by name or ID..." value="@ViewBag.Search" />
         <select name="status" class="form-control" onchange="this.form.submit()">
             <option value="">All Status</option>
             <option value="0" selected="@(ViewBag.Status?.ToString()=="0")">Available</option>
@@ -25,31 +25,39 @@
     </form>
 </div>
 
-<table class="data-table">
-    <thead>
-        <tr><th>ID</th><th>Name</th><th>Type</th><th>Detail</th><th>Price</th><th>Status</th><th>Condition</th><th>Actions</th></tr>
-    </thead>
-    <tbody>
-    @foreach (var r in Model)
-    {
-        string badgeClass = r.Status switch { 0 => "badge-available", 1 => "badge-occupied", 2 => "badge-cleaning", _ => "badge-repair" };
-        string typeBadge = r.RoomType == 0 ? "badge-vip" : "badge-standard";
-        <tr>
-            <td>@r.RoomID</td>
-            <td><strong>@r.RoomName</strong></td>
-            <td><span class="badge @typeBadge">@r.RoomTypeDisplay</span></td>
-            <td>@r.RoomDetailDisplay</td>
-            <td>₹@r.Price.ToString("N0")</td>
-            <td><span class="badge @badgeClass">@r.StatusDisplay</span></td>
-            <td>@r.ConditionDisplay</td>
-            <td>
-                <a href="/Room/Edit/@r.RoomID" class="btn btn-primary btn-sm">✏️</a>
-                <form method="post" asp-action="Delete" style="display:inline;">
-                    <input type="hidden" name="id" value="@r.RoomID" />
-                    <button class="btn btn-danger btn-sm" onclick="return confirm('Delete this room?')">🗑️</button>
-                </form>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class="table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr><th>ID</th><th>Name</th><th>Type</th><th>Detail</th><th>Price</th><th>Status</th><th>Condition</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        @if (!Model.Any())
+        {
+            <tr><td colspan="8"><div class="empty-state"><div class="empty-icon">🛏</div><p>No rooms found</p></div></td></tr>
+        }
+        @foreach (var r in Model)
+        {
+            string badgeClass = r.Status switch { 0 => "badge-available", 1 => "badge-occupied", 2 => "badge-cleaning", _ => "badge-repair" };
+            string typeBadge = r.RoomType == 0 ? "badge-vip" : "badge-standard";
+            <tr>
+                <td style="color:var(--text-muted);font-size:0.82rem;">@r.RoomID</td>
+                <td><strong>@r.RoomName</strong></td>
+                <td><span class="badge @typeBadge">@r.RoomTypeDisplay</span></td>
+                <td>@r.RoomDetailDisplay</td>
+                <td style="font-weight:600;">₹@r.Price.ToString("N0")</td>
+                <td><span class="badge @badgeClass">@r.StatusDisplay</span></td>
+                <td style="color:var(--text-secondary);">@r.ConditionDisplay</td>
+                <td>
+                    <div class="action-row">
+                        <a href="/Room/Edit/@r.RoomID" class="btn btn-primary btn-sm">✏️</a>
+                        <form method="post" asp-action="Delete" style="display:inline;">
+                            <input type="hidden" name="id" value="@r.RoomID" />
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('Delete this room?')">🗑️</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

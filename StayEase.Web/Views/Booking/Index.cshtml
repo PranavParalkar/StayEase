@@ -6,21 +6,29 @@
     <a href="/Booking/Create" class="btn btn-success">➕ New Booking</a>
 </div>
 
-<table class="data-table">
-    <thead><tr><th>Booking ID</th><th>Customer</th><th>Employee</th><th>Date</th><th>Deposit</th><th>Status</th><th>Actions</th></tr></thead>
-    <tbody>
-    @foreach (var b in Model)
-    {
-        <tr>
-            <td><strong>@b.BookingID</strong></td><td>@b.CustomerID</td><td>@b.EmployeeID</td>
-            <td>@b.BookingDate.ToString("yyyy-MM-dd HH:mm")</td><td>₹@b.Deposit.ToString("N0")</td>
-            <td><span class="badge @(b.ProcessStatus==0?"badge-pending":"badge-processed")">@b.StatusDisplay</span></td>
-            <td>
-                <a href="/Booking/Details/@b.BookingID" class="btn btn-primary btn-sm">📋 Details</a>
-                <a href="/Booking/AddService/@b.BookingID" class="btn btn-warning btn-sm">🍽</a>
-                <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@b.BookingID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">🗑️</button></form>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class="table-wrapper">
+    <table class="data-table">
+        <thead><tr><th>Booking ID</th><th>Customer</th><th>Employee</th><th>Date</th><th>Deposit</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+        @if (!Model.Any()) { <tr><td colspan="7"><div class="empty-state"><div class="empty-icon">📋</div><p>No bookings yet</p></div></td></tr> }
+        @foreach (var b in Model)
+        {
+            <tr>
+                <td><strong>@b.BookingID</strong></td>
+                <td>@b.CustomerID</td>
+                <td style="color:var(--text-secondary);">@b.EmployeeID</td>
+                <td>@b.BookingDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td style="font-weight:600;">₹@b.Deposit.ToString("N0")</td>
+                <td><span class="badge @(b.ProcessStatus==0?"badge-pending":"badge-processed")">@b.StatusDisplay</span></td>
+                <td>
+                    <div class="action-row">
+                        <a href="/Booking/Details/@b.BookingID" class="btn btn-primary btn-sm">📋 Details</a>
+                        <a href="/Booking/AddService/@b.BookingID" class="btn btn-warning btn-sm">🍽</a>
+                        <form method="post" asp-action="Delete" style="display:inline;"><input type="hidden" name="id" value="@b.BookingID" /><button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">🗑️</button></form>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -6,25 +6,28 @@
     <a href="/Invoice/Create" class="btn btn-success">➕ Create Invoice</a>
 </div>
 
-<table class="data-table">
-    <thead>
-        <tr>
-            @foreach (System.Data.DataColumn col in Model.Columns) { <th>@col.ColumnName</th> }
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (System.Data.DataRow row in Model.Rows)
-    {
-        <tr>
-            @foreach (var item in row.ItemArray) { <td>@item</td> }
-            <td>
-                <form method="post" asp-action="Delete" style="display:inline;">
-                    <input type="hidden" name="id" value="@row[0]" />
-                    <button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">🗑️</button>
-                </form>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class="table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in Model.Columns) { <th>@col.ColumnName</th> }
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (Model.Rows.Count == 0) { <tr><td colspan="@(Model.Columns.Count + 1)"><div class="empty-state"><div class="empty-icon">💰</div><p>No invoices yet</p></div></td></tr> }
+        @foreach (System.Data.DataRow row in Model.Rows)
+        {
+            <tr>
+                @foreach (var item in row.ItemArray) { <td>@item</td> }
+                <td>
+                    <form method="post" asp-action="Delete" style="display:inline;">
+                        <input type="hidden" name="id" value="@row[0]" />
+                        <button class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">🗑️</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
