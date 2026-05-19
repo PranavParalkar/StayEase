@@ -2,17 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "StayEase WinForms",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build-winforms",
-            "program": "${workspaceFolder}/StayEase.WinForms/bin/Debug/net10.0-windows/StayEase.WinForms.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/StayEase.WinForms",
-            "stopAtEntry": false,
-            "console": "internalConsole"
-        },
-        {
             "name": "StayEase Web",
             "type": "coreclr",
             "request": "launch",

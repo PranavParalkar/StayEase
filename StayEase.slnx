@@ -3,5 +3,4 @@
   <Project Path="StayEase.DAO/StayEase.DAO.csproj" />
   <Project Path="StayEase.DTO/StayEase.DTO.csproj" />
   <Project Path="StayEase.Web/StayEase.Web.csproj" />
-  <Project Path="StayEase.WinForms/StayEase.WinForms.csproj" />
 </Solution>
