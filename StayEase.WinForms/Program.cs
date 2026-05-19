@@ -1,16 +1,28 @@
-namespace StayEase.WinForms;
-
-static class Program
+namespace StayEase.WinForms
 {
-    /// <summary>
-    ///  The main entry point for the application.
-    /// </summary>
-    [STAThread]
-    static void Main()
+    internal static class Program
     {
-        // To customize application configuration such as set high DPI settings or default font,
-        // see https://aka.ms/applicationconfiguration.
-        ApplicationConfiguration.Initialize();
-        Application.Run(new Form1());
-    }    
+        [STAThread]
+        static void Main()
+        {
+            ApplicationConfiguration.Initialize();
+
+            // Login → Dashboard loop (supports logout and re-login)
+            while (true)
+            {
+                using var loginForm = new frmLogin();
+                var loginResult = loginForm.ShowDialog();
+
+                if (loginResult != DialogResult.OK || loginForm.LoggedInAccount == null)
+                    break;
+
+                using var mainForm = new frmMain(loginForm.LoggedInAccount);
+                var mainResult = mainForm.ShowDialog();
+
+                // If user chose logout (DialogResult.Retry), loop back to login
+                if (mainResult != DialogResult.Retry)
+                    break;
+            }
+        }
+    }
 }

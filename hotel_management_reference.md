@@ -587,20 +587,20 @@ HotelManagement.Web/            (ASP.NET MVC — Practical 05, 07)
 
 ## 10. Implementation Checklist
 
-- [ ] Set up SQL Server database with all tables
-- [ ] Create DTO class library with all entity classes
-- [ ] Create DAO layer with ADO.NET database helper
-- [ ] Implement BUS layer with business logic for each entity
-- [ ] Build Login form with authentication
-- [ ] Build Main Dashboard with navigation
-- [ ] Implement Room Management (CRUD + status)
-- [ ] Implement Customer Management (CRUD + search)
-- [ ] Implement Employee Management (CRUD + Excel import/export)
-- [ ] Implement Service Management (CRUD + image support)
-- [ ] Implement Amenity Management (CRUD + room assignment)
-- [ ] Implement Booking Management (full workflow)
-- [ ] Implement Invoice/Billing (calculations + payment)
-- [ ] Implement Statistics & Reports (charts)
-- [ ] Implement Role-Based Access Control
+- [x] Set up SQL Server database with all tables ✅
+- [x] Create DTO class library with all entity classes ✅
+- [x] Create DAO layer with ADO.NET database helper ✅
+- [x] Implement BUS layer with business logic for each entity ✅
+- [x] Build Login form with authentication ✅
+- [x] Build Main Dashboard with navigation ✅
+- [x] Implement Room Management (CRUD + status) ✅
+- [x] Implement Customer Management (CRUD + search) ✅
+- [x] Implement Employee Management (CRUD + Excel import/export) ✅
+- [x] Implement Service Management (CRUD + image support) ✅
+- [x] Implement Amenity Management (CRUD + room assignment) ✅
+- [x] Implement Booking Management (full workflow) ✅
+- [x] Implement Invoice/Billing (calculations + payment) ✅
+- [x] Implement Statistics & Reports (charts) ✅
+- [x] Implement Role-Based Access Control ✅
 - [ ] Build ASP.NET MVC web version (for Practical 05-07)
 - [ ] Deploy to cloud (for Practical 07)
