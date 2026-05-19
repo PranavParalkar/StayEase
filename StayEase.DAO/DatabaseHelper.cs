@@ -15,7 +15,7 @@ namespace StayEase.DAO
 
         private DatabaseHelper()
         {
-            _connectionString = "Server=localhost;Database=StayEase;Trusted_Connection=True;TrustServerCertificate=True;";
+            _connectionString = "Server=localhost\\SQLEXPRESS;Database=StayEase;Trusted_Connection=True;TrustServerCertificate=True;";
         }
 
         public static DatabaseHelper Instance
