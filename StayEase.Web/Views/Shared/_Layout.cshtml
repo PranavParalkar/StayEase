@@ -52,7 +52,7 @@
                 </form>
             </div>
         </aside>
-        <main class="main-content fade-in">
+        <main class="main-content fade-in page-@currentCtrl?.ToLower()">
             @if (TempData["Success"] != null)
             {
                 <div class="alert alert-success">@TempData["Success"]</div>

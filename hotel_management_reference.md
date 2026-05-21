@@ -1,35 +1,5 @@
-# 🏨 Hotel Management System — Complete Functional Reference
 
-> [!IMPORTANT]
-> This document is a comprehensive analysis of a Hotel Management System (originally in Vietnamese) to serve as a reference for building a new project in **C# with SQL Server**, aligned with the **Web and Desktop Application Development (2304368L)** course curriculum.
-
----
-
-## 1. Project Overview
-
-| Aspect | Detail |
-|---|---|
-| **Original Language** | Vietnamese (variable names, UI labels) |
-| **Technology Stack** | C# WinForms, SQL Server, ADO.NET, Firebase (email), Excel export |
-| **Architecture** | 3-Tier: GUI → BUS (Business Logic) → DAO (Data Access) → SQL Server |
-| **Target for New Project** | C# WinForms + ASP.NET MVC, SQL Server, ADO.NET |
-
-### Course Alignment Map
-
-| Course Practical | Hotel Management Feature |
-|---|---|
-| **P01** – C# Basics | All DTOs, basic constructs |
-| **P02** – OOP & Exception Handling | 3-tier architecture, class hierarchy, encapsulation |
-| **P03** – Collections & Assemblies | Lists of DTOs, separate class libraries (DTO, BUS, DAO) |
-| **P04** – Windows Forms | All GUI forms (Login, Dashboard, CRUD screens) |
-| **P05** – ASP.NET MVC | Can extend to web version |
-| **P06** – ADO.NET | Database.cs — full CRUD with SqlConnection, SqlDataReader, SqlDataAdapter |
-| **P07** – ASP.NET + Auth + Deploy | Login/role system, CRUD web app, cloud deployment |
-| **Mini Project** | The entire Hotel Management System |
-
----
-
-## 2. Architecture
+## . Architecture
 
 ```mermaid
 graph TD
@@ -85,9 +55,9 @@ erDiagram
     INVOICE ||--o| BOOKING : "for"
 ```
 
-### 3.2 Table Definitions (English Translation)
+### 3.2 Table Definitions
 
-#### ROOM (PHONG)
+#### ROOM 
 
 | Column | Type | Description |
 |---|---|---|
@@ -100,7 +70,7 @@ erDiagram
 | Condition (hienTrang) | int | 0 = New, 1 = Old |
 | IsDeleted (xuLy) | int | 0 = Active, 1 = Soft-deleted |
 
-#### CUSTOMER (KHACHHANG)
+#### CUSTOMER
 
 | Column | Type | Description |
 |---|---|---|
@@ -114,7 +84,7 @@ erDiagram
 | DateOfBirth (ngaySinh) | date | Birth date |
 | IsDeleted (xuLy) | int | Soft delete flag |
 
-#### EMPLOYEE (NHANVIEN)
+#### EMPLOYEE
 
 | Column | Type | Description |
 |---|---|---|
@@ -129,7 +99,7 @@ erDiagram
 | DailyWage (luong1Ngay) | int | Salary per day |
 | IsDeleted (xuLy) | int | Soft delete flag |
 
-#### ACCOUNT (TAIKHOAN)
+#### ACCOUNT
 
 | Column | Type | Description |
 |---|---|---|
@@ -140,7 +110,7 @@ erDiagram
 | RoleID (maPQ) | varchar(20) FK | Assigned role |
 | IsDeleted (xuLy) | int | Soft delete flag |
 
-#### SERVICE (DICHVU)
+#### SERVICE
 
 | Column | Type | Description |
 |---|---|---|
@@ -151,7 +121,7 @@ erDiagram
 | Image (hinhAnh) | nvarchar(max) | Base64-encoded image |
 | IsDeleted (xuLy) | int | Soft delete flag |
 
-#### AMENITY (TIENICH)
+#### AMENITY
 
 | Column | Type | Description |
 |---|---|---|
@@ -159,7 +129,7 @@ erDiagram
 | AmenityName (tenTI) | nvarchar(30) | Name (e.g., TV, Iron, Hair Dryer) |
 | IsDeleted (xuLy) | int | Soft delete flag |
 
-#### ROOM_AMENITY (CHITIETTIENICH)
+#### ROOM_AMENITY 
 
 | Column | Type | Description |
 |---|---|---|
@@ -167,7 +137,7 @@ erDiagram
 | AmenityID (maTI) | varchar(20) PK/FK | Amenity reference |
 | Quantity (soLuong) | int | Number of items |
 
-#### BOOKING (CHITIETTHUE)
+#### BOOKING
 
 | Column | Type | Description |
 |---|---|---|
@@ -179,7 +149,7 @@ erDiagram
 | ProcessStatus (tinhTrangXuLy) | int | 0 = Pending, 1 = Processed |
 | IsDeleted (xuLy) | int | Soft delete flag |
 
-#### BOOKING_ROOM (CHITIETTHUEPHONG)
+#### BOOKING_ROOM
 
 | Column | Type | Description |
 |---|---|---|
@@ -192,7 +162,7 @@ erDiagram
 | RentalPrice (giaThue) | int | Price charged |
 | Status (tinhTrang) | int | 0 = Pending, 1 = Checked In, 2 = Checked Out |
 
-#### BOOKING_SERVICE (CHITIETTHUEDICHVU)
+#### BOOKING_SERVICE 
 
 | Column | Type | Description |
 |---|---|---|
@@ -202,7 +172,7 @@ erDiagram
 | Quantity (SoLuong) | int | Number of times used |
 | Price (giaDV) | int | Price at time of usage |
 
-#### INVOICE (HOADON)
+#### INVOICE 
 
 | Column | Type | Description |
 |---|---|---|
@@ -214,21 +184,21 @@ erDiagram
 | PaymentMethod (phuongThucThanhToan) | smallint | 0 = Cash, 1 = Bank Transfer |
 | IsDeleted (xuLy) | int | Soft delete flag |
 
-#### ROLE (PHANQUYEN)
+#### ROLE 
 
 | Column | Type | Description |
 |---|---|---|
 | RoleID (maPQ) | varchar(20) PK | Role identifier |
 | RoleName (tenPQ) | nvarchar(50) | Role name (e.g., Admin, Receptionist) |
 
-#### FEATURE (CHUCNANG)
+#### FEATURE 
 
 | Column | Type | Description |
 |---|---|---|
 | FeatureID (maChucNang) | varchar(20) PK | Feature code |
 | FeatureName (tenChucNang) | nvarchar(100) | Feature name |
 
-**System Features (seeded data):**
+**System Features :**
 1. Room Management
 2. Service Management
 3. Customer Management
@@ -238,7 +208,7 @@ erDiagram
 7. Invoice Management
 8. View Statistics
 
-#### ROLE_FEATURE (CHITIETCHUCNANG)
+#### ROLE_FEATURE 
 
 | Column | Type | Description |
 |---|---|---|
@@ -581,26 +551,4 @@ HotelManagement.Web/            (ASP.NET MVC — Practical 05, 07)
 │   ├── Invoice/
 │   └── Shared/
 └── App_Data/
-```
-
----
-
-## 10. Implementation Checklist
-
-- [x] Set up SQL Server database with all tables ✅
-- [x] Create DTO class library with all entity classes ✅
-- [x] Create DAO layer with ADO.NET database helper ✅
-- [x] Implement BUS layer with business logic for each entity ✅
-- [x] Build Login form with authentication ✅
-- [x] Build Main Dashboard with navigation ✅
-- [x] Implement Room Management (CRUD + status) ✅
-- [x] Implement Customer Management (CRUD + search) ✅
-- [x] Implement Employee Management (CRUD + Excel import/export) ✅
-- [x] Implement Service Management (CRUD + image support) ✅
-- [x] Implement Amenity Management (CRUD + room assignment) ✅
-- [x] Implement Booking Management (full workflow) ✅
-- [x] Implement Invoice/Billing (calculations + payment) ✅
-- [x] Implement Statistics & Reports (charts) ✅
-- [x] Implement Role-Based Access Control ✅
-- [x] Build ASP.NET MVC web version (for Practical 05-07) ✅
-- [ ] Deploy to cloud (for Practical 07)
+``

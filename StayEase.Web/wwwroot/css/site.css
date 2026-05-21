@@ -695,3 +695,53 @@ select.form-control {
     gap: 8px;
     align-items: center;
 }
+
+.page-room {
+    --accent: #34d399;
+    --accent-glow: rgba(52, 211, 153, 0.25);
+    --gradient-1: linear-gradient(135deg, #34d399, #38bdf8);
+    --border-hover: rgba(52, 211, 153, 0.3);
+}
+
+.page-service {
+    --accent: #fbbf24;
+    --accent-glow: rgba(251, 191, 36, 0.25);
+    --gradient-1: linear-gradient(135deg, #fbbf24, #f97316);
+    --border-hover: rgba(251, 191, 36, 0.3);
+}
+
+.page-customer {
+    --accent: #818cf8;
+    --accent-glow: rgba(129, 140, 248, 0.25);
+    --gradient-1: linear-gradient(135deg, #818cf8, #c084fc);
+    --border-hover: rgba(129, 140, 248, 0.3);
+}
+
+.page-employee {
+    --accent: #22d3ee;
+    --accent-glow: rgba(34, 211, 238, 0.25);
+    --gradient-1: linear-gradient(135deg, #22d3ee, #38bdf8);
+    --border-hover: rgba(34, 211, 238, 0.3);
+}
+
+.page-booking {
+    --accent: #a78bfa;
+    --accent-glow: rgba(167, 139, 250, 0.25);
+    --gradient-1: linear-gradient(135deg, #a78bfa, #f472b6);
+    --border-hover: rgba(167, 139, 250, 0.3);
+}
+
+.page-invoice {
+    --accent: #f472b6;
+    --accent-glow: rgba(244, 114, 182, 0.25);
+    --gradient-1: linear-gradient(135deg, #f472b6, #fb7185);
+    --border-hover: rgba(244, 114, 182, 0.3);
+}
+
+
+.page-statistics {
+    --accent: #fb923c;
+    --accent-glow: rgba(251, 146, 60, 0.25);
+    --gradient-1: linear-gradient(135deg, #fb923c, #f97316);
+    --border-hover: rgba(251, 146, 60, 0.3);
+}

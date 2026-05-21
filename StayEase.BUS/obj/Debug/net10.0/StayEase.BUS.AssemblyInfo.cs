@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StayEase.BUS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2771a9c00ab065a88ec62d03f1da3b3874862c02")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3377d75ffb51100c999b444900236cb3e19d2478")]
 [assembly: System.Reflection.AssemblyProductAttribute("StayEase.BUS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StayEase.BUS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

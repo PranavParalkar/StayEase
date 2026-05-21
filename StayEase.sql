@@ -14,7 +14,7 @@ USE StayEase;
 GO
 
 -- ============================================
--- TABLE: ROLE (PHANQUYEN)
+-- TABLE: ROLE
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Role')
 BEGIN
@@ -26,7 +26,7 @@ END
 GO
 
 -- ============================================
--- TABLE: FEATURE (CHUCNANG)
+-- TABLE: FEATURE
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Feature')
 BEGIN
@@ -38,7 +38,7 @@ END
 GO
 
 -- ============================================
--- TABLE: ROLE_FEATURE (CHITIETCHUCNANG)
+-- TABLE: ROLE_FEATURE 
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'RoleFeature')
 BEGIN
@@ -53,7 +53,7 @@ END
 GO
 
 -- ============================================
--- TABLE: EMPLOYEE (NHANVIEN)
+-- TABLE: EMPLOYEE
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Employee')
 BEGIN
@@ -73,7 +73,7 @@ END
 GO
 
 -- ============================================
--- TABLE: ACCOUNT (TAIKHOAN)
+-- TABLE: ACCOUNT 
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Account')
 BEGIN
@@ -91,7 +91,7 @@ END
 GO
 
 -- ============================================
--- TABLE: ROOM (PHONG)
+-- TABLE: ROOM 
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Room')
 BEGIN
@@ -109,7 +109,7 @@ END
 GO
 
 -- ============================================
--- TABLE: AMENITY (TIENICH)
+-- TABLE: AMENITY 
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Amenity')
 BEGIN
@@ -122,7 +122,7 @@ END
 GO
 
 -- ============================================
--- TABLE: ROOM_AMENITY (CHITIETTIENICH)
+-- TABLE: ROOM_AMENITY 
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'RoomAmenity')
 BEGIN
@@ -138,7 +138,7 @@ END
 GO
 
 -- ============================================
--- TABLE: CUSTOMER (KHACHHANG)
+-- TABLE: CUSTOMER 
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Customer')
 BEGIN
@@ -157,7 +157,7 @@ END
 GO
 
 -- ============================================
--- TABLE: SERVICE (DICHVU)
+-- TABLE: SERVICE
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Service')
 BEGIN
@@ -173,7 +173,7 @@ END
 GO
 
 -- ============================================
--- TABLE: BOOKING (CHITIETTHUE)
+-- TABLE: BOOKING 
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Booking')
 BEGIN
@@ -192,7 +192,7 @@ END
 GO
 
 -- ============================================
--- TABLE: BOOKING_ROOM (CHITIETTHUEPHONG)
+-- TABLE: BOOKING_ROOM 
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'BookingRoom')
 BEGIN
@@ -213,7 +213,7 @@ END
 GO
 
 -- ============================================
--- TABLE: BOOKING_SERVICE (CHITIETTHUEDICHVU)
+-- TABLE: BOOKING_SERVICE 
 -- ============================================
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'BookingService')
 BEGIN
